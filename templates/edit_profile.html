@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Editează profilul academic</h1>
+
+{% if error %}
+<div class="error-message">
+    {{ error }}
+</div>
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label>Universitate</label>
+    <input type="text" name="university" value="{{ profile.university }}" required>
+
+    <br><br>
+
+    <label>Specializare</label>
+    <input type="text" name="specialization" value="{{ profile.specialization }}" required>
+
+    <br><br>
+
+    <label>An de studiu</label>
+    <input type="number" name="study_year" value="{{ profile.study_year }}" required>
+
+    <br><br>
+
+    <label>Bio</label>
+    <textarea name="bio">{{ profile.bio }}</textarea>
+
+    <br><br>
+
+    <label>Rol</label>
+    <select name="role" required>
+        <option value="student" {% if profile.role == "student" %}selected{% endif %}>Student/Elev</option>
+        <option value="tutor" {% if profile.role == "tutor" %}selected{% endif %}>Tutor</option>
+        <option value="admin" {% if profile.role == "admin" %}selected{% endif %}>Admin</option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">Salvează profilul</button>
+</form>
+{% endblock %}

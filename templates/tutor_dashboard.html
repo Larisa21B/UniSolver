@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Dashboard Tutor</h1>
+
+<div class="dashboard-grid">
+
+    <a class="dashboard-card" href="/add-skill/">
+        <h3>Adaugă skill</h3>
+        <p>Publică materiile la care poți oferi tutoring.</p>
+    </a>
+
+    <a class="dashboard-card" href="/received-requests/">
+        <h3>Cereri primite</h3>
+        <p>Vezi studenții care au trimis cereri.</p>
+    </a>
+
+    <a class="dashboard-card" href="/reviews/">
+        <h3>Review-uri</h3>
+        <p>Vezi feedback-ul primit.</p>
+    </a>
+
+</div>
+{% endblock %}

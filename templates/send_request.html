@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Trimite cerere tutoring</h1>
+
+<p>
+    Tutor:
+    <strong>{{ tutor.username }}</strong>
+</p>
+
+<p>
+    Materie:
+    <strong>{{ skill.subject }}</strong>
+</p>
+
+{% if error %}
+<div class="error-message">
+    {{ error }}
+</div>
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label>Data disponibilă</label>
+    <select name="availability_id" required>
+        <option value="">Alege data disponibilă</option>
+
+        {% for availability in availabilities %}
+            <option
+                value="{{ availability.id }}"
+                data-start="{{ availability.start_time|time:'H:i' }}"
+                data-end="{{ availability.end_time|time:'H:i' }}"
+            >
+                {{ availability.available_date }}
+                —
+                {{ availability.start_time|time:'H:i' }}
+                -
+                {{ availability.end_time|time:'H:i' }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <br><br>
+
+    <label>Ora început dorită</label>
+    <input type="time" name="requested_start_time" required>
+
+    <br><br>
+
+    <label>Ora sfârșit dorită</label>
+    <input type="time" name="requested_end_time" required>
+
+    <br><br>
+
+    <label>Mesaj către tutor</label>
+    <textarea name="message" required></textarea>
+
+    <br><br>
+
+    <button type="submit">
+        Trimite cererea
+    </button>
+</form>
+
+<br>
+
+<a href="/tutors/">
+    Înapoi la anunțuri
+</a>
+
+{% endblock %}

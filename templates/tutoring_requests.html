@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Cererile mele de tutoring</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Materie</th>
+            <th>Tutor</th>
+            <th>Data</th>
+            <th>Interval</th>
+            <th>Mesaj</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for request in requests %}
+        <tr>
+            <td>{{ request.subject }}</td>
+            <td>{{ request.tutor.username }}</td>
+            <td>{{ request.requested_date }}</td>
+            <td>
+                {{ request.requested_start_time }}
+                -
+                {{ request.requested_end_time }}
+            </td>
+            <td>{{ request.message }}</td>
+            <td>{{ request.status }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">
+                Nu există cereri de tutoring.
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br>
+
+<a href="/dashboard/">
+    Înapoi la Dashboard
+</a>
+
+{% endblock %}

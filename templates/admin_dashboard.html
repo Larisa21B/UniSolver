@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Dashboard Admin</h1>
+
+<div class="dashboard-grid">
+    <a class="dashboard-card" href="/admin/">
+        <h3>Django Admin</h3>
+        <p>Gestionează utilizatorii și datele aplicației.</p>
+    </a>
+
+    <a class="dashboard-card" href="/project-teams/">
+        <h3>Echipe proiect</h3>
+        <p>Monitorizează echipele create.</p>
+    </a>
+</div>
+{% endblock %}

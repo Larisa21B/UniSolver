@@ -1,0 +1,185 @@
+{% extends "base.html" %} {% block content %}
+
+<h1>Anunțuri tutoring disponibile</h1>
+
+<form method="GET">
+  <label>Caută după materie:</label>
+
+  <select name="subject">
+    <option value="">Toate materiile</option>
+    <option
+      value="Matematică"
+      {%
+      if
+      subject=""
+      ="Matematică"
+      %}selected{%
+      endif
+      %}
+    >
+      Matematică
+    </option>
+    <option
+      value="Informatică"
+      {%
+      if
+      subject=""
+      ="Informatică"
+      %}selected{%
+      endif
+      %}
+    >
+      Informatică
+    </option>
+    <option
+      value="Programare Python"
+      {%
+      if
+      subject=""
+      ="Programare Python"
+      %}selected{%
+      endif
+      %}
+    >
+      Programare Python
+    </option>
+    <option
+      value="Baze de date"
+      {%
+      if
+      subject=""
+      ="Baze de date"
+      %}selected{%
+      endif
+      %}
+    >
+      Baze de date
+    </option>
+    <option
+      value="Algoritmi"
+      {%
+      if
+      subject=""
+      ="Algoritmi"
+      %}selected{%
+      endif
+      %}
+    >
+      Algoritmi
+    </option>
+    <option
+      value="Structuri de date"
+      {%
+      if
+      subject=""
+      ="Structuri de date"
+      %}selected{%
+      endif
+      %}
+    >
+      Structuri de date
+    </option>
+    <option
+      value="Rețele de calculatoare"
+      {%
+      if
+      subject=""
+      ="Rețele de calculatoare"
+      %}selected{%
+      endif
+      %}
+    >
+      Rețele de calculatoare
+    </option>
+    <option
+      value="Sisteme de operare"
+      {%
+      if
+      subject=""
+      ="Sisteme de operare"
+      %}selected{%
+      endif
+      %}
+    >
+      Sisteme de operare
+    </option>
+    <option
+      value="Inginerie software"
+      {%
+      if
+      subject=""
+      ="Inginerie software"
+      %}selected{%
+      endif
+      %}
+    >
+      Inginerie software
+    </option>
+    <option
+      value="Inteligență artificială"
+      {%
+      if
+      subject=""
+      ="Inteligență artificială"
+      %}selected{%
+      endif
+      %}
+    >
+      Inteligență artificială
+    </option>
+  </select>
+
+  <button type="submit">Caută</button>
+</form>
+
+<br />
+
+<table>
+  <thead>
+    <tr>
+      <th>Tutor</th>
+      <th>Materie</th>
+      <th>Disponibilitate</th>
+      <th>Acțiuni</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for skill in skills %}
+    <tr>
+      <td>{{ skill.user.username }}</td>
+
+      <td>{{ skill.subject }}</td>
+
+      <td>
+        {% for availability in skill.availabilities.all %}
+        <p>
+          {{ availability.day_of_week }}, {{ availability.start_time }} - {{
+          availability.end_time }}
+        </p>
+        {% empty %} Nespecificată {% endfor %}
+      </td>
+
+      <td>
+        <a href="/tutor-profile/{{ skill.user.id }}/"> Vezi profil </a>
+
+        |
+
+        <a href="/send-request/{{ skill.id }}/">Trimite cerere</a>
+      </td>
+    </tr>
+    {% empty %}
+
+    <tr>
+      <td colspan="4">Nu există tutori pentru această căutare.</td>
+    </tr>
+
+    {% endfor %}
+  </tbody>
+</table>
+
+<br />
+
+<a href="/dashboard/"> Înapoi la Dashboard </a>
+
+{% endblock %}

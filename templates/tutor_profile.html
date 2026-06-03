@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Profil tutor: {{ tutor.username }}</h1>
+
+<div class="card">
+    <h3>Informații academice</h3>
+    <p><strong>Universitate:</strong> {{ profile.university }}</p>
+    <p><strong>Specializare:</strong> {{ profile.specialization }}</p>
+    <p><strong>An studiu:</strong> {{ profile.study_year }}</p>
+    <p><strong>Bio:</strong> {{ profile.bio }}</p>
+</div>
+
+<h2>Skill-uri</h2>
+{% for skill in skills %}
+<div class="card">
+    <p><strong>Materie:</strong> {{ skill.subject }}</p>
+</div>
+{% empty %}
+<p class="empty-state">Tutorul nu are skill-uri adăugate.</p>
+{% endfor %}
+
+<h2>Disponibilitate</h2>
+{% for slot in availability %}
+<div class="card">
+    <p>{{ slot.day_of_week }}: {{ slot.start_time }} - {{ slot.end_time }}</p>
+</div>
+{% empty %}
+<p class="empty-state">Tutorul nu are disponibilitate adăugată.</p>
+{% endfor %}
+
+<a href="/schedule-session/{{ tutor.id }}/">
+    <button>Programează sesiune</button>
+</a>
+
+<a href="/send-request/{{ tutor.id }}/">
+    <button>Trimite cerere tutoring</button>
+</a>
+{% endblock %}

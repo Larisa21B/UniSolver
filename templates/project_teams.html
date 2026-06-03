@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Proiecte de echipă disponibile</h1>
+
+<p>
+    <a href="/project-teams/create/">
+        Creează echipă nouă
+    </a>
+</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Titlu proiect</th>
+            <th>Materie</th>
+            <th>Descriere</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        {% for team in teams %}
+        <tr>
+
+            <td>
+                {{ team.title }}
+            </td>
+
+            <td>
+                {{ team.subject }}
+            </td>
+
+            <td>
+                {{ team.description }}
+            </td>
+
+            <td>
+                {{ team.status }}
+            </td>
+
+        </tr>
+
+        {% empty %}
+
+        <tr>
+            <td colspan="4">
+                Nu există echipe de proiect disponibile.
+            </td>
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+</table>
+
+<br>
+
+<a href="/dashboard/">
+    Înapoi la Dashboard
+</a>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Creează echipă de proiect</h1>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label>Titlu</label><br>
+    <input type="text" name="title" required><br><br>
+
+    <label>Materie</label><br>
+    <input type="text" name="subject" required><br><br>
+
+    <label>Descriere</label><br>
+    <textarea name="description" required></textarea><br><br>
+
+    <button type="submit">Creează echipa</button>
+</form>
+
+<a href="/project-teams/">Înapoi la echipe</a>
+{% endblock %}

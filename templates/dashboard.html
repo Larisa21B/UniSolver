@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Dashboard Tutor</h1>
+
+<p>
+    Bine ai venit,
+    <strong>{{ request.user.username }}</strong>!
+</p>
+
+<p>
+    Gestionează anunțurile de tutoring, cererile primite și sesiunile programate.
+</p>
+
+<div class="dashboard-grid">
+
+    <a class="dashboard-card" href="/add-skill/">
+
+        <h3>Publică anunț tutoring</h3>
+
+        <p>
+            Adaugă materii și intervale disponibile pentru tutoring.
+        </p>
+
+    </a>
+
+    <a class="dashboard-card" href="/tutors/">
+
+        <h3>Vezi anunțurile</h3>
+
+        <p>
+            Vizualizează toate anunțurile publicate de tutori.
+        </p>
+
+    </a>
+
+    <a class="dashboard-card" href="/received-requests/">
+
+        <h3>Cereri primite</h3>
+
+        <p>
+            Acceptă sau respinge cererile primite de la elevi.
+        </p>
+
+    </a>
+
+    <a class="dashboard-card" href="/tutoring-requests/">
+
+        <h3>Cererile mele</h3>
+
+        <p>
+            Vezi cererile de tutoring trimise de tine.
+        </p>
+
+    </a>
+
+    <a class="dashboard-card" href="/my-sessions/">
+
+        <h3>Calendar sesiuni</h3>
+
+        <p>
+            Vizualizează sesiunile de tutoring programate.
+        </p>
+
+    </a>
+
+    <a class="dashboard-card" href="/project-teams/">
+
+        <h3>Echipe de proiect</h3>
+
+        <p>
+            Creează sau găsește echipe pentru proiecte academice.
+        </p>
+
+    </a>
+
+    <a class="dashboard-card" href="/reviews/">
+
+        <h3>Review-uri</h3>
+
+        <p>
+            Vezi feedback-ul primit în urma colaborărilor.
+        </p>
+
+    </a>
+
+    <a class="dashboard-card" href="/edit-profile/">
+
+        <h3>Profilul meu</h3>
+
+        <p>
+            Editează informațiile personale și academice.
+        </p>
+
+    </a>
+
+</div>
+
+{% endblock %}

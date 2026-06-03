@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Review-uri</h1>
+
+{% for review in reviews %}
+    <div class="card">
+        <p><strong>De la:</strong> {{ review.reviewer.username }}</p>
+        <p><strong>Pentru:</strong> {{ review.reviewed_user.username }}</p>
+        <p><strong>Rating:</strong> {{ review.rating }}/5</p>
+        <p><strong>Comentariu:</strong> {{ review.comment }}</p>
+    </div>
+    <hr>
+{% empty %}
+    <p class="empty-state">Nu există tutori pentru această căutare.</p>
+{% endfor %}
+
+<a href="/dashboard/">Înapoi la dashboard</a>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Calendar sesiuni tutoring</h1>
+
+<div class="card">
+    <h2>Date cu programări</h2>
+
+    {% if sessions_data %}
+        {% for session in sessions_data %}
+            <button type="button" onclick="selectDate('{{ session.date }}')">
+                {{ session.date }}
+            </button>
+        {% endfor %}
+    {% else %}
+        <p class="empty-state">Nu există sesiuni programate.</p>
+    {% endif %}
+</div>
+
+<div class="card">
+    <label>Selectează o dată</label>
+    <input type="date" id="calendarDate" onchange="showSessionsForDate()">
+</div>
+
+<h2>Programări în ziua selectată</h2>
+
+<div id="sessionsList">
+    <p class="empty-state">Selectează o dată.</p>
+</div>
+
+{{ sessions_data|json_script:"sessions-data" }}
+
+<script>
+function selectDate(date) {
+    document.getElementById("calendarDate").value = date;
+    showSessionsForDate();
+}
+
+function showSessionsForDate() {
+    const sessions = JSON.parse(
+        document.getElementById("sessions-data").textContent
+    );
+
+    const selectedDate = document.getElementById("calendarDate").value;
+    const container = document.getElementById("sessionsList");
+
+    const filtered = sessions.filter(session => session.date === selectedDate);
+
+    if (filtered.length === 0) {
+        container.innerHTML = `
+            <p class="empty-state">
+                Nu există programări pentru această zi.
+            </p>
+        `;
+        return;
+    }
+
+    container.innerHTML = "";
+
+    filtered.forEach(session => {
+        container.innerHTML += `
+            <div class="card">
+                <h3>${session.subject}</h3>
+                <p><strong>Student:</strong> ${session.student}</p>
+                <p><strong>Tutor:</strong> ${session.tutor}</p>
+                <p><strong>Interval:</strong> ${session.start} - ${session.end}</p>
+                <p><strong>Status:</strong> ${session.status}</p>
+            </div>
+        `;
+    });
+}
+</script>
+
+{% endblock %}

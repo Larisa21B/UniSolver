@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Adaugă anunț tutoring</h1>
+
+{% if error %}
+<div class="error-message">
+    {{ error }}
+</div>
+{% endif %}
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label>Materie</label>
+    <select name="subject" required>
+        <option value="">Alege materia</option>
+        <option value="Matematică">Matematică</option>
+        <option value="Informatică">Informatică</option>
+        <option value="Programare Python">Programare Python</option>
+        <option value="Baze de date">Baze de date</option>
+        <option value="Algoritmi">Algoritmi</option>
+        <option value="Structuri de date">Structuri de date</option>
+        <option value="Rețele de calculatoare">Rețele de calculatoare</option>
+        <option value="Sisteme de operare">Sisteme de operare</option>
+        <option value="Inginerie software">Inginerie software</option>
+        <option value="Inteligență artificială">Inteligență artificială</option>
+    </select>
+
+    <h2>Disponibilitate</h2>
+
+    <div class="card">
+        <label>Selectează data</label>
+        <input type="date" id="availableDate">
+
+        <br><br>
+
+        <label>Ora început</label>
+        <input type="time" id="startTime">
+
+        <br><br>
+
+        <label>Ora sfârșit</label>
+        <input type="time" id="endTime">
+
+        <br><br>
+
+        <button type="button" onclick="addAvailability()">
+            Adaugă disponibilitate
+        </button>
+    </div>
+
+    <h2>Date selectate</h2>
+
+    <div id="selectedAvailabilities"></div>
+
+    <br>
+
+    <button type="submit">
+        Publică anunțul
+    </button>
+</form>
+
+<script>
+function addAvailability() {
+    const date = document.getElementById("availableDate").value;
+    const start = document.getElementById("startTime").value;
+    const end = document.getElementById("endTime").value;
+
+    if (!date || !start || !end) {
+        alert("Completează data, ora de început și ora de sfârșit.");
+        return;
+    }
+
+    const container = document.getElementById("selectedAvailabilities");
+
+    const card = document.createElement("div");
+    card.classList.add("card");
+
+    card.innerHTML = `
+        <p><strong>Data:</strong> ${date}</p>
+        <p><strong>Interval:</strong> ${start} - ${end}</p>
+
+        <input type="hidden" name="available_date" value="${date}">
+        <input type="hidden" name="start_time" value="${start}">
+        <input type="hidden" name="end_time" value="${end}">
+    `;
+
+    container.appendChild(card);
+
+    document.getElementById("availableDate").value = "";
+    document.getElementById("startTime").value = "";
+    document.getElementById("endTime").value = "";
+}
+</script>
+
+{% endblock %}

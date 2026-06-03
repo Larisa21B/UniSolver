@@ -1,0 +1,101 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>UniSolver</title>
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+    <nav>
+
+        {% if request.user.is_authenticated %}
+
+            <span class="nav-user">
+                Salut, {{ request.user.username }}
+            </span>
+
+            {% if request.user.academic_profile.role == "student" %}
+
+                <a href="/student-dashboard/">
+                    Dashboard
+                </a>
+
+            {% elif request.user.academic_profile.role == "tutor" %}
+
+                <a href="/tutor-dashboard/">
+                    Dashboard
+                </a>
+
+            {% elif request.user.academic_profile.role == "admin" %}
+
+                <a href="/admin-dashboard/">
+                    Dashboard
+                </a>
+
+            {% else %}
+
+                <a href="/dashboard/">
+                    Dashboard
+                </a>
+
+            {% endif %}
+
+            <a href="/tutors/">
+                Tutori
+            </a>
+
+            <a href="/tutoring-requests/">
+                Cereri
+            </a>
+
+            <a href="/project-teams/">
+                Echipe
+            </a>
+
+            <a href="/reviews/">
+                Review-uri
+            </a>
+
+            <a href="/edit-profile/">
+                Profil
+            </a>
+
+            <a href="/my-sessions/">
+                Calendar
+            </a>
+
+            <a href="/logout/">
+                Logout
+            </a>
+
+        {% else %}
+
+            <a href="/login/">
+                Login
+            </a>
+
+            <a href="/register/">
+                Register
+            </a>
+
+        {% endif %}
+
+    </nav>
+
+    <main>
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+</body>
+
+</html>

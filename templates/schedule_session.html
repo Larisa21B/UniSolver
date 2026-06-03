@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Programează sesiune cu {{ tutor.username }}</h1>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <label>Materie</label>
+    <input type="text" name="subject" required>
+
+    <label>Data sesiunii</label>
+    <input type="date" name="session_date" required>
+
+    <label>Ora început</label>
+    <input type="time" name="start_time" required>
+
+    <label>Ora sfârșit</label>
+    <input type="time" name="end_time" required>
+
+    <button type="submit">Programează</button>
+</form>
+{% endblock %}
